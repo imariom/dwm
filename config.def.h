@@ -12,7 +12,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx 	= 10;		/* gaps between windows */
+static const unsigned int gappx 	= 12;		/* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -30,8 +30,7 @@ static const char *fonts[] = {
 static const char col_1[] = "#282c34"; /* background color of bar */
 static const char col_2[] = "#282c34"; /* border color unfocused windows */
 static const char col_3[] = "#d7d7d7";
-static const char col_4[] = "#924441"; /* border color focused windows and tags */
-
+static const char col_4[] = "#06b6d4"; /* border color focused windows and tags */
 static const char *colors[][3] = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_3,     col_1,     col_2 },
@@ -54,9 +53,9 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
-static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const float mfact     	= 0.55; /* factor of master area size [0.05..0.95] */
+static const int nmaster     	= 1;    /* number of clients in master area */
+static const int resizehints 	= 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
@@ -79,17 +78,14 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[]    = { "dm-run", NULL };
+static const char *dmenucmd[]   = { "dmenu_run", NULL };
 static const char *termcmd[] 	= { "alacritty", NULL };
 static const char *rofi[] 		= { "rofi", "-show", "drun", "-show-emojis", NULL };
-static const char *vsCode[] 	= { "code", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_o, spawn,               {.v = vsCode } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = rofi } },
-
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
