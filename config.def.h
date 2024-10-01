@@ -11,18 +11,21 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx 	= 12;		/* gaps between windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int gappx     = 12;	/* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int horizpadbar        = 6;		/* horizontal padding for statusbar */
-static const int vertpadbar         = 7;		/* vertical padding for statusbar */
+static const int horizpadbar        = 6;	/* horizontal padding for statusbar */
+static const int vertpadbar         = 7;	/* vertical padding for statusbar */
 
 /* Default font will be Inconsolata if installed (sudo pacman -S ttf-inconsolata-nerd ttf-nerd-fonts-symbols).
  * Otherwise, default font will be Source code (sudo pacman -S ttf-sourcecodepro-nerd)
  */
-static const char *fonts[] = { "Inconsolata Nerd Font:weight=regular:size=15:antialias=true" };
+static const char *fonts[] = {
+	"Inconsolata Nerd Font:weight=regular:size=15:antialias=true",
+	"SymbolsNerdFont:size=15" // give dwm tags (1-9) support for emojis
+};
 
 static const char col_1[] = "#282c34"; /* background color of bar */
 static const char col_2[] = "#282c34"; /* border color unfocused windows */
@@ -39,6 +42,7 @@ static const char *colors[][3] = {
 /* static const char *tags[] = { "", "", "", "", "", """, "", "", """}; */
 static const char *tags[] = {"dev", "www", "sys", "edi", "chat", "mus", "vid"};
 
+
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -50,9 +54,9 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     	= 0.55; /* factor of master area size [0.05..0.95] */
-static const int nmaster     	= 1;    /* number of clients in master area */
-static const int resizehints 	= 1;    /* 1 means respect size hints in tiled resizals */
+static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const int nmaster     = 1;    /* number of clients in master area */
+static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
@@ -75,14 +79,15 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[]   = { "dmenu_run", NULL };
+static const char *dmenucmd[] = { "dmenu_run", NULL };
 static const char *termcmd[] 	= { "alacritty", NULL };
 
-static const char *rofi[] 			= { "rofi", "-show", "drun", "-show-emojis", NULL }; /* launches rofi */
+static const char *rofi[] 		= { "rofi", "-show", "drun", "-show-emojis", NULL }; /* launches rofi */
 static const char *braveBrowswer[] 	= { "brave", NULL }; /* launches Brave Browswer */
-static const char *code[] 			= { "code", NULL }; /* launches visual studio code */
+static const char *code[] 		= { "code", NULL }; /* launches visual studio code */
 static const char *mailspring[] 	= { "mailspring", NULL }; /* launches mailspring mail client */
 static const char *thunar[] 		= { "thunar", NULL }; /* launches thunar file manager */
+static const char *spotify[] 		= { "spotify-launcher &", NULL }; /* launches thunar file manager */
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -91,11 +96,11 @@ static const Key keys[] = {
 
 	/* Application control - launch scripts */
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = braveBrowswer } },
-	{ MODKEY|ShiftMask,             XK_c,      spawn,          {.v = code } },
+	{ MODKEY|ShiftMask,             XK_k,      spawn,          {.v = code } },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = spotify } },
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = mailspring } },
 	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = thunar } },
-	
+
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -107,7 +112,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 
-	/* Layout manipulation */
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -137,6 +141,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
+
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
