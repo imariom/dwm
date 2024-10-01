@@ -19,11 +19,9 @@
 Dwm is an exceptionally fast, lightweight, and dynamic window manager for X, developed by the talented team at suckless.org. This build is my personal version of dwm, where I’ve applied several patches to enhance its functionality and usability, making it more 'sensible' while maintaining its minimalist approach, rather than strictly adhering to the 'suckless' philosophy.
 
 ### Patches added to this build include:
-  * floatrules (setting the status bar width and floating coordinates)
   * statuspadding (horizontal and vertical padding in the status bar are now configurable options)
   * attachaside (new clients appear in the stack rather than as the master)
-  * uselessgap (adding gaps when more than one window)
-  * rotatestack (moves a window through the stack, in either direction)
+  * fullgaps (adding gaps when more than one window)
 
 ### Dependencies for imariom-dwm include:
   * ttf-inconsolata-nerd (you can substitute it with your preferred nerd font family)
