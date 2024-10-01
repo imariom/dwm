@@ -1,57 +1,82 @@
-#+imariom-dwm
+## imariom-dwm
 
-* Table of Contents :toc:
-- [[#about-dwm][About Suckless Dwm]]
-  - [[#the-patches-i-added-to-this-build-include][The patches I added to this build include:]]
-  - [[#the-dependencies-for-dwm-distrotube-include][The dependencies for imariom-dwm include:]]
-- [[#installing-imariom-dwm][Installing imariom-dwm]]
-- [[#my-keybindings][Keybindings]]
-  - [[#main-keybindings][Main keybindings]]
-  - [[#application-controls][Application controls]]
+## Table of Contents:
+  * [About Suckless dwm](#about-suckless-dwm)
+    * [Patches added to this build include](#patches-added-to-this-build-include)
+    * [Dependencies for imariom-dwm include](#dependencies-for-imariom-dwm-include)
+  * [Installing imariom-dwm](#installing-imariom-dwm)
+    * [Running and auto-starting dwm](#running-and-auto-starting-dwm)
+    * [Configuring imariom-dwm](#configuring-imariom-dwm)
+  * [Keybindings](#keybindings)
+    * [Main keybindings](#main-keybindings)
+    * [Application controls](#application-controls)
 
-* What is DWM?
-#+CAPTION: dmenu-distrotube
-#+ATTR_HTML: :alt imariom-dwm :title imariom-dwm :align left
-[[https://github.com/imariom/dotfiles/.screenshots/imariom-dwm-thumb.png]]
+## About Suckless dwm
+|![imariom-dwm](https://github.com/imariom/dotfiles/.screenshots/imariom-dwm-thumb.png)|
+|:--:|
+| *imariom-dwm* |
 
 Dwm is an exceptionally fast, lightweight, and dynamic window manager for X, developed by the talented team at suckless.org. This build is my personal version of dwm, where I’ve applied several patches to enhance its functionality and usability, making it more 'sensible' while maintaining its minimalist approach, rather than strictly adhering to the 'suckless' philosophy.
 
-** Patches added to this build include:
-+ floatrules (setting the status bar width and floating coordinates)
-+ statuspadding (horizontal and vertical padding in the status bar are now configurable options)
-+ attachaside (new clients appear in the stack rather than as the master)
-+ uselessgap (adding gaps when more than one window)
-+ rotatestack (moves a window through the stack, in either direction)
+### Patches added to this build include:
+  * floatrules (setting the status bar width and floating coordinates)
+  * statuspadding (horizontal and vertical padding in the status bar are now configurable options)
+  * attachaside (new clients appear in the stack rather than as the master)
+  * uselessgap (adding gaps when more than one window)
+  * rotatestack (moves a window through the stack, in either direction)
 
-** The dependencies for imariom-dwm include:
-+ ttf-inconsolata-nerd (you can substitute it with your preferred nerd font family)
-+ ttf-nerd-fonts-symbols
-+ Alacritty
-+ rofi
+### Dependencies for imariom-dwm include:
+  * ttf-inconsolata-nerd (you can substitute it with your preferred nerd font family)
+  * ttf-nerd-fonts-symbols (for emojis in tags list)
+  * Alacritty
+  * rofi
 
 Also, you will need to add the following from the AUR:
-+ https://aur.archlinux.org/packages/libxft-bgra/ (needed for colored fonts and emojis)
+  * https://aur.archlinux.org/packages/libxft-bgra/ (needed for colored fonts and emojis)
 
-* Installing imariom-dwm
+## Installing imariom-dwm
 Download the source code from this repository or use a git clone:
 
-#+begin_example
+```
 git clone https://gitlab.com/imariom/imariom-dwm.git
 cd imariom-dwm
 sudo make clean install
-#+end_example
+```
 
 This build has only been tested on Arch Linux However, you are welcome to test it on your own system, and feel free to modify or customize it as needed. Your feedback and contributions are highly appreciated as we continue refining the project.
 
-=NOTE:=Installing imariom-dwm will overwrite your existing dwm installation.
+> [!NOTE]
+> Installing ***imariom-dwm*** will overwrite your existing dwm installation.
 
-* Keybindings
+### Running and auto-starting dwm
+If you're not using a login manager (like LightDM), you can configure dwm to start automatically by adding the following line to your ```.xinitrc``` file and launching it with startx:
+
+```exec dwm```
+
+If you're using a login manager (such as LightDM), ensure there's a dwm.desktop file in your ```/usr/share/xsessions/``` directory. The file should look something like this:
+
+```
+[Desktop Entry]
+Encoding=UTF-8
+Name=Dwm
+Comment=Dynamic window manager
+Exec=dwm
+Icon=dwm
+Type=XSession
+```
+## Configuring imariom-dwm
+Inside the downloaded source code of imariom-dwm you can configure it by editing the ```config.def.h``` and (re)compiling the source code.
+
+> [!NOTE]
+> Before (re)compiling with ```sudo make install``` make sure to delete the current (if exists) ```config.h``` file.
+
+## Keybindings
 The MODKEY is set to the Super key (aka the Windows key).
 
-** Main keybindings
+### Main keybindings
 
 | Keybinding              | Action                                                       |
-|-------------------------+--------------------------------------------------------------|
+|-------------------------|--------------------------------------------------------------|
 | MODKEY + RETURN         | opens terminal (alacritty but can be easily changed)         |
 | MODKEY + SHIFT + RETURN | opens run launcher (dmenu but can be changed)                |
 | MODKEY + SHIFT + c      | closes window with focus                                     |
@@ -69,14 +94,12 @@ The MODKEY is set to the Super key (aka the Windows key).
 | MODKEY + .              | focusmon +1 (switches focus next monitors)                   |
 | MODKEY + ,              | focusmon -1 (switches focus to prev monitors)                |
 
-** Application controls
+### Application controls
 
 | Keybinding       | Action                                                                       |
-|------------------+------------------------------------------------------------------------------|
+|------------------|------------------------------------------------------------------------------|
 | MODKEY + ALT + b | open Brave browser                                                           |
 | MODKEY + ALT + c | open Visual Studio Code                                                      |
 | MODKEY + ALT + s | open Spotify                                                                 |
-| MODKEY + ALT + m | open [mailspring](https://github.com/Foundry376/Mailspring)                  |
-| MODKEY + ALT + f | open [Thunar (Thunar)](https://wiki.archlinux.org/title/Thunar) |
-
-
+| MODKEY + ALT + m | open [mailspring](https://github.com/Foundry376/Mailspring) Email Client     |
+| MODKEY + ALT + f | open [Thunar](https://wiki.archlinux.org/title/Thunar) File Manager          |
